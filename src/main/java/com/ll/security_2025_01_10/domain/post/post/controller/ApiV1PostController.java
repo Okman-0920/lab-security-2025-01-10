@@ -7,7 +7,7 @@ import com.ll.security_2025_01_10.domain.post.post.entity.Post;
 import com.ll.security_2025_01_10.domain.post.post.service.PostService;
 import com.ll.security_2025_01_10.global.rq.Rq;
 import com.ll.security_2025_01_10.global.rsData.RsData;
-import com.ll.security_2025_01_10.global.standard.util.page.dto.PageDto;
+import com.ll.security_2025_01_10.global.standard.page.dto.PageDto;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;

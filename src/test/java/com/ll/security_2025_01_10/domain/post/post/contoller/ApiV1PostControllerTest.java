@@ -1,4 +1,4 @@
-package security_2025_01_10.domain.post.post.contoller;
+package com.ll.security_2025_01_10.domain.post.post.contoller;
 
 import com.ll.security_2025_01_10.domain.member.member.entity.Member;
 import com.ll.security_2025_01_10.domain.member.member.service.MemberService;

@@ -1,11 +1,10 @@
-package security_2025_01_10.domain.post.comment.controller;
+package com.ll.security_2025_01_10.domain.post.comment.controller;
 
 import com.ll.security_2025_01_10.domain.member.member.entity.Member;
 import com.ll.security_2025_01_10.domain.member.member.service.MemberService;
 import com.ll.security_2025_01_10.domain.post.comment.entity.PostComment;
 import com.ll.security_2025_01_10.domain.post.post.entity.Post;
 import com.ll.security_2025_01_10.domain.post.post.service.PostService;
-import com.ll.security_2025_01_10.domain.post.comment.controller.ApiV1PostCommentController;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;

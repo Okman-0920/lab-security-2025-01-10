@@ -1,4 +1,4 @@
-package security_2025_01_10.member.member.controller;
+package com.ll.security_2025_01_10.member.member.controller;
 
 import com.ll.security_2025_01_10.domain.member.member.controller.ApiV1MemberController;
 import com.ll.security_2025_01_10.domain.member.member.entity.Member;
