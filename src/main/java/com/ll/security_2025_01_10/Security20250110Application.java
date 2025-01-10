@@ -1,4 +1,4 @@
-package com.ll.security20250110;
+package com.ll.security_2025_01_10;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
