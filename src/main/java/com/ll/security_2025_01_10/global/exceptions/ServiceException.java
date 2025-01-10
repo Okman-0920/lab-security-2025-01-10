@@ -1,6 +1,6 @@
 package com.ll.security_2025_01_10.global.exceptions;
 
-import com.ll.restByTdd.global.rsData.RsData;
+import com.ll.security_2025_01_10.global.rsData.RsData;
 
 public class ServiceException extends RuntimeException {
     private final String resultCode;

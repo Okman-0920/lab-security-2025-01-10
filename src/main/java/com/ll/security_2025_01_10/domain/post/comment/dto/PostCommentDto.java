@@ -1,6 +1,6 @@
 package com.ll.security_2025_01_10.domain.post.comment.dto;
 
-import com.ll.restByTdd.domain.post.comment.entity.PostComment;
+import com.ll.security_2025_01_10.domain.post.comment.entity.PostComment;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

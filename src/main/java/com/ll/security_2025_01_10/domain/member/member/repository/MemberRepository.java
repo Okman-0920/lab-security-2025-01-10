@@ -1,6 +1,6 @@
 package com.ll.security_2025_01_10.domain.member.member.repository;
 
-import com.ll.restByTdd.domain.member.member.entity.Member;
+import com.ll.security_2025_01_10.domain.member.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

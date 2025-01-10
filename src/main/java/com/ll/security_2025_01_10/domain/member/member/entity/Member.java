@@ -1,6 +1,6 @@
 package com.ll.security_2025_01_10.domain.member.member.entity;
 
-import com.ll.restByTdd.global.jpa.entity.BaseTime;
+import com.ll.security_2025_01_10.global.jpa.entity.BaseTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.*;

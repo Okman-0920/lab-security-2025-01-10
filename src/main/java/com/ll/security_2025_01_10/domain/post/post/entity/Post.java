@@ -1,9 +1,9 @@
 package com.ll.security_2025_01_10.domain.post.post.entity;
 
-import com.ll.restByTdd.domain.member.member.entity.Member;
-import com.ll.restByTdd.domain.post.comment.entity.PostComment;
-import com.ll.restByTdd.global.exceptions.ServiceException;
-import com.ll.restByTdd.global.jpa.entity.BaseTime;
+import com.ll.security_2025_01_10.domain.member.member.entity.Member;
+import com.ll.security_2025_01_10.domain.post.comment.entity.PostComment;
+import com.ll.security_2025_01_10.global.exceptions.ServiceException;
+import com.ll.security_2025_01_10.global.jpa.entity.BaseTime;
 import jakarta.persistence.*;
 import lombok.*;
 

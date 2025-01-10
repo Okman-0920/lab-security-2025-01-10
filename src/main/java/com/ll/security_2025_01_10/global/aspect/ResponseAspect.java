@@ -1,6 +1,6 @@
 package com.ll.security_2025_01_10.global.aspect;
 
-import com.ll.restByTdd.global.rsData.RsData;
+import com.ll.security_2025_01_10.global.rsData.RsData;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;

@@ -1,10 +1,10 @@
 package com.ll.security_2025_01_10.global.initData;
 
-import com.ll.restByTdd.domain.member.member.entity.Member;
-import com.ll.restByTdd.domain.member.member.service.MemberService;
-import com.ll.restByTdd.domain.post.post.entity.Post;
-import com.ll.restByTdd.domain.post.post.service.PostService;
-import com.ll.restByTdd.global.app.AppConfig;
+import com.ll.security_2025_01_10.domain.member.member.entity.Member;
+import com.ll.security_2025_01_10.domain.member.member.service.MemberService;
+import com.ll.security_2025_01_10.domain.post.post.entity.Post;
+import com.ll.security_2025_01_10.domain.post.post.service.PostService;
+import com.ll.security_2025_01_10.global.app.AppConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;

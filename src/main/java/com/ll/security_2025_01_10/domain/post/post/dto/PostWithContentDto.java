@@ -1,6 +1,6 @@
 package com.ll.security_2025_01_10.domain.post.post.dto;
 
-import com.ll.restByTdd.domain.post.post.entity.Post;
+import com.ll.security_2025_01_10.domain.post.post.entity.Post;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

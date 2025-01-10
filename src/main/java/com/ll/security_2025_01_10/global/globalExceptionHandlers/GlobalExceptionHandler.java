@@ -1,8 +1,8 @@
 package com.ll.security_2025_01_10.global.globalExceptionHandlers;
 
-import com.ll.restByTdd.global.app.AppConfig;
-import com.ll.restByTdd.global.exceptions.ServiceException;
-import com.ll.restByTdd.global.rsData.RsData;
+import com.ll.security_2025_01_10.global.app.AppConfig;
+import com.ll.security_2025_01_10.global.exceptions.ServiceException;
+import com.ll.security_2025_01_10.global.rsData.RsData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

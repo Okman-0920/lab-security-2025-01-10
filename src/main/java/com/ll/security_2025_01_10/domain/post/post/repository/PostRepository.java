@@ -1,7 +1,7 @@
 package com.ll.security_2025_01_10.domain.post.post.repository;
 
-import com.ll.restByTdd.domain.member.member.entity.Member;
-import com.ll.restByTdd.domain.post.post.entity.Post;
+import com.ll.security_2025_01_10.domain.member.member.entity.Member;
+import com.ll.security_2025_01_10.domain.post.post.entity.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

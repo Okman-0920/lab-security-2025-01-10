@@ -1,9 +1,9 @@
 package com.ll.security_2025_01_10.global.rq;
 
-import com.ll.restByTdd.domain.member.member.entity.Member;
-import com.ll.restByTdd.domain.member.member.service.MemberService;
-import com.ll.restByTdd.global.exceptions.ServiceException;
-import com.ll.restByTdd.global.standard.util.Ut;
+import com.ll.security_2025_01_10.domain.member.member.entity.Member;
+import com.ll.security_2025_01_10.domain.member.member.service.MemberService;
+import com.ll.security_2025_01_10.global.exceptions.ServiceException;
+import com.ll.security_2025_01_10.global.standard.util.Ut;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

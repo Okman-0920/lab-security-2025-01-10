@@ -1,13 +1,13 @@
 package com.ll.security_2025_01_10.domain.post.comment.controller;
 
-import com.ll.restByTdd.domain.member.member.entity.Member;
-import com.ll.restByTdd.domain.post.comment.dto.PostCommentDto;
-import com.ll.restByTdd.domain.post.comment.entity.PostComment;
-import com.ll.restByTdd.domain.post.post.entity.Post;
-import com.ll.restByTdd.domain.post.post.service.PostService;
-import com.ll.restByTdd.global.exceptions.ServiceException;
-import com.ll.restByTdd.global.rq.Rq;
-import com.ll.restByTdd.global.rsData.RsData;
+import com.ll.security_2025_01_10.domain.member.member.entity.Member;
+import com.ll.security_2025_01_10.domain.post.comment.dto.PostCommentDto;
+import com.ll.security_2025_01_10.domain.post.comment.entity.PostComment;
+import com.ll.security_2025_01_10.domain.post.post.entity.Post;
+import com.ll.security_2025_01_10.domain.post.post.service.PostService;
+import com.ll.security_2025_01_10.global.exceptions.ServiceException;
+import com.ll.security_2025_01_10.global.rq.Rq;
+import com.ll.security_2025_01_10.global.rsData.RsData;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
