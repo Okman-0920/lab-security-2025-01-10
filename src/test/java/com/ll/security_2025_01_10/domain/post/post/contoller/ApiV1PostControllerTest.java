@@ -86,7 +86,7 @@ class ApiV1PostControllerTest {
     }
 
     @Test
-    @WithUserDetails("user3")
+    @WithUserDetails("user")
     @DisplayName("글 작성")
     void t3() throws Exception {
         Member actor = memberService.findByUsername("user1").get();
