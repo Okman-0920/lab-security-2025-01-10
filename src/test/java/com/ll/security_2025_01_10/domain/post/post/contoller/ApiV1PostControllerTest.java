@@ -86,7 +86,7 @@ class ApiV1PostControllerTest {
     }
 
     @Test
-    @WithUserDetails("user") // 스프링 시큐리티가 자체적으로 만든 유저 룰임
+    @WithUserDetails("user3") // 스프링 시큐리티가 자체적으로 만든 유저 룰임
     @DisplayName("글 작성")
     void t3() throws Exception {
         Member actor = memberService.findByUsername("user1").get();
