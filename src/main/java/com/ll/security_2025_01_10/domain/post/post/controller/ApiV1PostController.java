@@ -35,8 +35,8 @@ public class ApiV1PostController {
 
         return new PageDto<>(
                 postService.findByAuthorPaged(actor, searchKeywordType, searchKeyword, page, pageSize) // Page<Post>
-                        .map(PostDto::new) // 외워야함: .map해서 -> Page<PostDto>
-        );  // PageDto<PostDto>
+                        .map(PostDto::new)
+        );
     }
 
 
