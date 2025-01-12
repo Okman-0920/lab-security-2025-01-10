@@ -19,8 +19,6 @@ public class SecurityConfig {
                         // authenticated() 와 충돌하나 조금 더 상위의 룰이기 때문에 All() 을 적용
                         // 룰은 위에서부터 (위쪽 코드부터) 적용
                         .permitAll()
-                        .requestMatchers("/h2-console/login.do")
-                        .authenticated()
                         .requestMatchers(
                                 // HTTP GET 요청에 대한 URL패턴은
                                 HttpMethod.GET,
