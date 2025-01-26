@@ -1,15 +1,17 @@
 package com.ll.security_2025_01_10.global.rq;
 
+import java.util.Optional;
+
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.RequestScope;
+
 import com.ll.security_2025_01_10.domain.member.member.entity.Member;
 import com.ll.security_2025_01_10.domain.member.member.service.MemberService;
 import com.ll.security_2025_01_10.global.exceptions.ServiceException;
 import com.ll.security_2025_01_10.global.standard.util.Ut;
+
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.RequestScope;
-
-import java.util.Optional;
 
 // 이 Class는 Request/ response 를 추상화한 객체
 // Request, Response, Cookie, Session 등을 다룬다
@@ -39,4 +41,8 @@ public class Rq {
 
         return opActor.get();
     }
+
+	public Member getActorByUsername(String username) {
+        return memberService.findByUsername(username).get();
+	}
 }

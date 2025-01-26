@@ -1,5 +1,7 @@
 package com.ll.security_2025_01_10.domain.post.post.controller;
 
+import java.security.Principal;
+
 import org.hibernate.validator.constraints.Length;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -91,10 +93,13 @@ public class ApiV1PostController {
     @PostMapping("/write")
     @Transactional
     public RsData<PostWithContentDto> write(
-            @RequestBody @Valid postWriteReqBody reqBody
+            @RequestBody @Valid postWriteReqBody reqBody,
+            Principal principal // 이친구 시큐리티 통해서 현재 로그인한 회원의 정보를 받아오는 친구다
     ) {
         Member actor = rq.checkAuthentication();
-
+        if (principal != null) {
+            actor = rq.getActorByUsername(principal.getName());
+        }
 
         Post post = postService.write(
                 actor,
