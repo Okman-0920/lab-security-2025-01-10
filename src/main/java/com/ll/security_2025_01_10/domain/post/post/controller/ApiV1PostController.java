@@ -1,5 +1,17 @@
 package com.ll.security_2025_01_10.domain.post.post.controller;
 
+import org.hibernate.validator.constraints.Length;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.ll.security_2025_01_10.domain.member.member.entity.Member;
 import com.ll.security_2025_01_10.domain.post.post.dto.PostDto;
 import com.ll.security_2025_01_10.domain.post.post.dto.PostWithContentDto;
@@ -8,12 +20,10 @@ import com.ll.security_2025_01_10.domain.post.post.service.PostService;
 import com.ll.security_2025_01_10.global.rq.Rq;
 import com.ll.security_2025_01_10.global.rsData.RsData;
 import com.ll.security_2025_01_10.global.standard.page.dto.PageDto;
+
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.validator.constraints.Length;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/posts")
@@ -80,7 +90,7 @@ public class ApiV1PostController {
 
     @PostMapping("/write")
     @Transactional
-    public RsData<PostWithContentDto> writeItem(
+    public RsData<PostWithContentDto> write(
             @RequestBody @Valid postWriteReqBody reqBody
     ) {
         Member actor = rq.checkAuthentication();

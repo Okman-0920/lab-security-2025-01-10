@@ -1,10 +1,14 @@
 package com.ll.security_2025_01_10.domain.post.post.contoller;
 
-import com.ll.security_2025_01_10.domain.member.member.entity.Member;
-import com.ll.security_2025_01_10.domain.member.member.service.MemberService;
-import com.ll.security_2025_01_10.domain.post.post.controller.ApiV1PostController;
-import com.ll.security_2025_01_10.domain.post.post.entity.Post;
-import com.ll.security_2025_01_10.domain.post.post.service.PostService;
+import static org.assertj.core.api.AssertionsForClassTypes.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.util.List;
+
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,14 +23,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
-import java.util.List;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.ll.security_2025_01_10.domain.member.member.entity.Member;
+import com.ll.security_2025_01_10.domain.member.member.service.MemberService;
+import com.ll.security_2025_01_10.domain.post.post.controller.ApiV1PostController;
+import com.ll.security_2025_01_10.domain.post.post.entity.Post;
+import com.ll.security_2025_01_10.domain.post.post.service.PostService;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -89,7 +90,7 @@ class ApiV1PostControllerTest {
     @WithUserDetails("user3") // 스프링 시큐리티가 자체적으로 만든 유저 룰임
     @DisplayName("글 작성")
     void t3() throws Exception {
-        Member actor = memberService.findByUsername("user1").get();
+        Member actor = memberService.findByUsername("user3").get();
 
         ResultActions resultActions = mvc
                 .perform(
@@ -118,7 +119,7 @@ class ApiV1PostControllerTest {
 
         resultActions
                 .andExpect(handler().handlerType(ApiV1PostController.class))
-                .andExpect(handler().methodName("writeItem"))
+                .andExpect(handler().methodName("write"))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.resultCode").value("201-1"))
                 .andExpect(jsonPath("$.msg").value("%d번 글이 작성되었습니다".formatted(post.getId())))

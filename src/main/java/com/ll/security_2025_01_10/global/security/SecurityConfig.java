@@ -8,44 +8,30 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
+	@Bean
+	public SecurityFilterChain baseSecurityFilterChain(HttpSecurity http) throws Exception {
+		http
+			.authorizeHttpRequests(authorizeRequests ->
+				authorizeRequests // 승인 요청시
+					.requestMatchers(HttpMethod.GET, "/api/*/posts/{id:\\d+}", "/api/*/posts", "/api/*/posts/{postId:\\d+}/comments", "/h2-console/**")
+					.permitAll()
+					// Matcher 된 get 매서드는 승인한다
+					.anyRequest()
+					// 그 외에 나머지 요청은
+					.authenticated()
+			)
+				// 인증되어야만 한다
+			.headers(
+				headers ->
+					headers.frameOptions(
+						frameOptions -> frameOptions.sameOrigin()
+					)
 
-    @Bean // 기존 시큐리티의 기능을 다 버리고, 우리의 커스터마이징 기능을 사용
-    public SecurityFilterChain baseSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(authorizeRequests ->
-                // 인증을 요청한다
-                authorizeRequests
-                        // request 를 matchers(승인) 할지 말지를 결정해라
-                        .requestMatchers("/h2-console/**")
-                        // authenticated() 와 충돌하나 조금 더 상위의 룰이기 때문에 All() 을 적용
-                        // 룰은 위에서부터 (위쪽 코드부터) 적용
-                        .permitAll()
-                        .requestMatchers(
-                                // HTTP GET 요청에 대한 URL패턴은
-                                HttpMethod.GET,
-                                // {id\\d+} = id는 아무거나 적어도 상관 없음 \\d+ 는 10진수 정수 패턴을 의미
-                                "/api/*/posts/{id:\\d+}",
-                                "/api/*/posts",
-                                "/api/*/posts/{postId:\\d+}/comments")
+			).csrf(csrf ->
+				csrf.disable()
+			// 보통 restAPI에서 csrf는 끈다
+			);
 
-
-                        .permitAll()
-                        // 그 외에 다른 요청은
-                        .anyRequest()
-
-                        // 인증 해야만 한다
-                        .authenticated()
-        ).headers(
-                        headers ->
-                                headers.frameOptions(
-                                        frameOptions ->
-                                                frameOptions.sameOrigin()
-                                )
-                )
-                .csrf( // 보통 restApi에서는 끈다
-                        csrf ->
-                                csrf.disable()
-                );
-        return http.build();
-    }
+		return http.build();
+	}
 }
-
