@@ -5,11 +5,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import lombok.RequiredArgsConstructor;
 
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
+	private final CustomAuthenticationFilter customAuthenticationFilter;
+
 	@Bean
 	public SecurityFilterChain baseSecurityFilterChain(HttpSecurity http) throws Exception {
+
 		http
 			.authorizeHttpRequests(authorizeRequests ->
 				authorizeRequests // 승인 요청시
@@ -26,11 +33,12 @@ public class SecurityConfig {
 					headers.frameOptions(
 						frameOptions -> frameOptions.sameOrigin()
 					)
-
+			// 보통 restAPI에서 csrf는 끈다
 			).csrf(csrf ->
 				csrf.disable()
-			// 보통 restAPI에서 csrf는 끈다
-			);
+			)
+			// addFilterBefore( 여기 필터가, 이 것이 작동하기 전에) 작동시켜라
+			.addFilterBefore(customAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
 		return http.build();
 	}
