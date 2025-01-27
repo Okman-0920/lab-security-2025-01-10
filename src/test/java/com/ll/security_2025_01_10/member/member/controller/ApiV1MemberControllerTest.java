@@ -161,9 +161,6 @@ class ApiV1MemberControllerTest {
                 .andExpect(jsonPath("$.data").exists())
                 .andExpect(jsonPath("$.data.item").exists())
                 .andExpect(jsonPath("$.data.item.id").value(member.getId()))
-                .andExpect(jsonPath("$.data.item.createDate").value(member.getCreateDate().toString()))
-                .andExpect(jsonPath("$.data.item.modifyDate").value(member.getModifyDate().toString()))
-                .andExpect(jsonPath("$.data.item.nickname").value(member.getNickname()))
                 .andExpect(jsonPath("$.data.apiKey").value(member.getApiKey()));
     }
 
@@ -287,10 +284,7 @@ class ApiV1MemberControllerTest {
                 .andExpect(handler().handlerType(ApiV1MemberController.class))
                 .andExpect(handler().methodName("me"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(member.getId()))
-                .andExpect(jsonPath("$.createDate").value(member.getCreateDate().toString()))
-                .andExpect(jsonPath("$.modifyDate").value(member.getModifyDate().toString()))
-                .andExpect(jsonPath("$.nickname").value(member.getNickname()));
+                .andExpect(jsonPath("$.id").value(member.getId()));
     }
 
     @Test

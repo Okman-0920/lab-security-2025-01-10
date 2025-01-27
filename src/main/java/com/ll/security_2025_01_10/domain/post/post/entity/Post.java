@@ -1,15 +1,25 @@
 package com.ll.security_2025_01_10.domain.post.post.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import com.ll.security_2025_01_10.domain.member.member.entity.Member;
 import com.ll.security_2025_01_10.domain.post.comment.entity.PostComment;
 import com.ll.security_2025_01_10.global.exceptions.ServiceException;
 import com.ll.security_2025_01_10.global.jpa.entity.BaseTime;
-import jakarta.persistence.*;
-import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -86,6 +96,6 @@ public class Post extends BaseTime {
 
         if (actor.equals(author)) return;
 
-        throw new ServiceException("403-1", "비공개글은 작성자만 볼 수 있습니다.");
+        throw new ServiceException("403-1", "비공개 글은 작성자만 볼 수 있습니다.");
     }
 }

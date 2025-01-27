@@ -17,6 +17,7 @@ import com.ll.security_2025_01_10.domain.post.post.dto.PostDto;
 import com.ll.security_2025_01_10.domain.post.post.dto.PostWithContentDto;
 import com.ll.security_2025_01_10.domain.post.post.entity.Post;
 import com.ll.security_2025_01_10.domain.post.post.service.PostService;
+import com.ll.security_2025_01_10.global.exceptions.ServiceException;
 import com.ll.security_2025_01_10.global.rq.Rq;
 import com.ll.security_2025_01_10.global.rsData.RsData;
 import com.ll.security_2025_01_10.global.standard.page.dto.PageDto;
@@ -73,6 +74,10 @@ public class ApiV1PostController {
 
         if (!post.isPublished()) {
             Member actor = rq.getActor();
+
+            if (actor == null) {
+                throw new ServiceException("401-1", "로그인이 필요합니다.");
+            }
 
             post.checkActorCanRead(actor);
         }
