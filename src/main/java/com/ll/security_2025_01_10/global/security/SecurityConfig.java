@@ -7,6 +7,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.ll.security_2025_01_10.global.rsData.RsData;
+import com.ll.security_2025_01_10.global.standard.util.Ut;
+
 import lombok.RequiredArgsConstructor;
 
 @Configuration
@@ -41,7 +44,37 @@ public class SecurityConfig {
 				csrf.disable()
 			)
 			// addFilterBefore( 여기 필터가, 이 것이 작동하기 전에) 작동시켜라
-			.addFilterBefore(customAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+			.addFilterBefore(customAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+			.exceptionHandling(
+				exceptionHandling -> exceptionHandling
+					.authenticationEntryPoint(
+						(request, response, authException) -> {
+							response.setContentType("application/json;charset=UTF-8");
+
+							// 401체크 체크
+							boolean is401 = authException.getLocalizedMessage().contains("authentication is required");
+
+							if (is401) {
+								response.setStatus(401);
+								response.getWriter().write(
+									Ut.json.tostring(
+										new RsData("401-1", "사용자 인증정보가 올바르지 않습니다.")
+									)
+								);
+								return;
+							}
+
+							response.setStatus(403);
+							response.getWriter().write(
+								Ut.json.tostring(
+									new RsData("403-1", request.getRequestURI() + ", " + authException.getLocalizedMessage())
+								)
+							);
+						}
+					)
+			);
+		;
+
 
 		return http.build();
 	}

@@ -148,7 +148,7 @@ class ApiV1PostControllerTest {
 
                 resultActions
                                 .andExpect(handler().handlerType(ApiV1PostController.class))
-                                .andExpect(handler().methodName("writeItem"))
+                                .andExpect(handler().methodName("write"))
                                 .andExpect(status().isUnauthorized())
                                 .andExpect(jsonPath("$.resultCode").value("401-1"))
                                 .andExpect(jsonPath("$.msg").value("apiKey를 입력해주세요."));
