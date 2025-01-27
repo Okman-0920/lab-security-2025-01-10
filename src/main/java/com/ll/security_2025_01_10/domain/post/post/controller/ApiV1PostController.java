@@ -1,8 +1,6 @@
 package com.ll.security_2025_01_10.domain.post.post.controller;
 
 import org.hibernate.validator.constraints.Length;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,7 +41,7 @@ public class ApiV1PostController {
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int pageSize
     ) {
-        Member actor = rq.checkAuthentication();
+        Member actor = rq.getActor();
 
         return new PageDto<>(
                 postService.findByAuthorPaged(actor, searchKeywordType, searchKeyword, page, pageSize) // Page<Post>
@@ -74,7 +72,7 @@ public class ApiV1PostController {
         Post post = postService.findById(id).get();
 
         if (!post.isPublished()) {
-            Member actor = rq.checkAuthentication();
+            Member actor = rq.getActor();
 
             post.checkActorCanRead(actor);
         }
@@ -93,13 +91,9 @@ public class ApiV1PostController {
     @PostMapping("/write")
     @Transactional
     public RsData<PostWithContentDto> write(
-            @RequestBody @Valid postWriteReqBody reqBody,
-            @AuthenticationPrincipal UserDetails user
+            @RequestBody @Valid postWriteReqBody reqBody
     ) {
-        Member actor = rq.checkAuthentication();
-        if (user != null) {
-            actor = rq.getActorByUsername(user.getUsername());
-        }
+        Member actor = rq.getActor();
 
         Post post = postService.write(
                 actor,
@@ -128,7 +122,7 @@ public class ApiV1PostController {
             @PathVariable long id,
             @RequestBody @Valid PostModifyReqBody reqBody
     ) {
-        Member actor = rq.checkAuthentication();
+        Member actor = rq.getActor();
 
         Post post = postService.findById(id).get();
 
@@ -150,7 +144,7 @@ public class ApiV1PostController {
     public RsData<Void> deleteItem(
             @PathVariable long id
     ) {
-        Member actor = rq.checkAuthentication();
+        Member actor = rq.getActor();
 
         Post post = postService.findById(id).get();
 

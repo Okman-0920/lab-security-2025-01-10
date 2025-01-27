@@ -1,5 +1,18 @@
 package com.ll.security_2025_01_10.domain.post.comment.controller;
 
+import java.util.List;
+
+import org.hibernate.validator.constraints.Length;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.ll.security_2025_01_10.domain.member.member.entity.Member;
 import com.ll.security_2025_01_10.domain.post.comment.dto.PostCommentDto;
 import com.ll.security_2025_01_10.domain.post.comment.entity.PostComment;
@@ -8,14 +21,10 @@ import com.ll.security_2025_01_10.domain.post.post.service.PostService;
 import com.ll.security_2025_01_10.global.exceptions.ServiceException;
 import com.ll.security_2025_01_10.global.rq.Rq;
 import com.ll.security_2025_01_10.global.rsData.RsData;
+
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.validator.constraints.Length;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/posts/{postId}/comments")
@@ -48,7 +57,7 @@ public class ApiV1PostCommentController {
             @PathVariable long id
     ) {
         // 해당 사용자가 권한이 있는지를 확인한다
-        Member actor = rq.checkAuthentication();
+        Member actor = rq.getActor();
 
         // 해당 게시물이 존재하는지 확인하고, 만약 없다면 존재하지 않는다고 에러를 처리
         Post post = postService.findById(postId).orElseThrow(
@@ -86,7 +95,7 @@ public class ApiV1PostCommentController {
              @PathVariable long id,
              @RequestBody @Valid PostCommentModifyReqBody reqBody
     ) {
-        Member actor = rq.checkAuthentication();
+        Member actor = rq.getActor();
 
         Post post = postService.findById(postId).orElseThrow(
                 () -> new ServiceException("404-1", "%d번 글은 존재하지 않습니다".formatted(postId))
@@ -119,7 +128,7 @@ public class ApiV1PostCommentController {
             @PathVariable long postId,
             @RequestBody @Valid PostCommentWriteReqBody reqBody
     ) {
-        Member actor = rq.checkAuthentication();
+        Member actor = rq.getActor();
 
         Post post = postService.findById(postId).orElseThrow(
                 () -> new ServiceException("404-1", "%d번 글은 존재하지 않습니다".formatted(postId))

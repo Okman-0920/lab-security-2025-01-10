@@ -16,11 +16,14 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain baseSecurityFilterChain(HttpSecurity http) throws Exception {
-
 		http
 			.authorizeHttpRequests(authorizeRequests ->
 				authorizeRequests // 승인 요청시
-					.requestMatchers(HttpMethod.GET, "/api/*/posts/{id:\\d+}", "/api/*/posts", "/api/*/posts/{postId:\\d+}/comments", "/h2-console/**")
+					.requestMatchers("/h2-console/**")
+					.permitAll()
+					.requestMatchers(HttpMethod.GET, "/api/*/posts/{id:\\d+}", "/api/*/posts", "/api/*/posts/{postId:\\d+}/comments")
+					.permitAll()
+					.requestMatchers("/api/*/members/login", "/api/*/members/join")
 					.permitAll()
 					// Matcher 된 get 매서드는 승인한다
 					.anyRequest()

@@ -1,16 +1,22 @@
 package com.ll.security_2025_01_10.domain.member.member.controller;
 
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.ll.security_2025_01_10.domain.member.member.dto.MemberDto;
 import com.ll.security_2025_01_10.domain.member.member.entity.Member;
 import com.ll.security_2025_01_10.domain.member.member.service.MemberService;
 import com.ll.security_2025_01_10.global.exceptions.ServiceException;
 import com.ll.security_2025_01_10.global.rq.Rq;
 import com.ll.security_2025_01_10.global.rsData.RsData;
+
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/members")
@@ -78,7 +84,7 @@ public class ApiV1MemberController {
     @GetMapping("/me")
     @Transactional(readOnly = true)
     public MemberDto me() {
-        Member member = rq.checkAuthentication();
+        Member member = rq.getActor();
 
         return new MemberDto(member);
     }

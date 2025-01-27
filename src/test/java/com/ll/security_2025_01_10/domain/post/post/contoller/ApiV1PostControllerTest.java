@@ -91,25 +91,20 @@ class ApiV1PostControllerTest {
                 Member actor = memberService.findByUsername("user1").get();
 
                 ResultActions resultActions = mvc
-                                .perform(
-                                                post("/api/v1/posts/write")
-                                                                // header: HTTP 요청 헤더(header)에 특정 값을 추가
-                                                                // "Authorization": 헤더의 이름으로, 클라이언트가 서버에 인증 정보를 전달하기 위해
-                                                                // 사용
-                                                                // "Bearer " + actor.getApiKey(): 헤더 값으로 "Bearer "라는 인증
-                                                                // 유형과 함께 API 키를 추가
-                                                                // "Bearer ": 인증 방식 중 하나로, 토큰을 사용하는 방식
-                                                                .content("""
-                                                                                {
-                                                                                    "title": "글1",
-                                                                                    "content": "글1의 내용",
-                                                                                    "published": true,
-                                                                                    "listed": false
-                                                                                }
-                                                                                """)
-                                                                .contentType(
-                                                                                new MediaType(MediaType.APPLICATION_JSON,
-                                                                                                StandardCharsets.UTF_8)))
+                    .perform(
+                        post("/api/v1/posts/write")
+                                .header("Authorization", "Bearer " + actor.getApiKey())
+                                .content("""
+                                                {
+                                                    "title": "글1",
+                                                    "content": "글1의 내용",
+                                                    "published": true,
+                                                    "listed": false
+                                                }
+                                                """)
+                                .contentType(
+                                                new MediaType(MediaType.APPLICATION_JSON,
+                                                                StandardCharsets.UTF_8)))
                                 .andDo(print());
 
                 Post post = postService.findLaTest().get();
@@ -123,10 +118,8 @@ class ApiV1PostControllerTest {
                                 .andExpect(jsonPath("$.resultCode").value("201-1"))
                                 .andExpect(jsonPath("$.msg").value("%d번 글이 작성되었습니다".formatted(post.getId())))
                                 .andExpect(jsonPath("$.data.id").value(post.getId()))
-                                .andExpect(jsonPath("$.data.createDate").value(
-                                                Matchers.startsWith(post.getCreateDate().toString().substring(0, 25))))
-                                .andExpect(jsonPath("$.data.modifyDate").value(
-                                                Matchers.startsWith(post.getModifyDate().toString().substring(0, 25))))
+                                .andExpect(jsonPath("$.data.createDate").value(Matchers.startsWith(post.getCreateDate().toString().substring(0, 25))))
+                                .andExpect(jsonPath("$.data.modifyDate").value(Matchers.startsWith(post.getModifyDate().toString().substring(0, 25))))
                                 .andExpect(jsonPath("$.data.authorId").value(post.getAuthor().getId()))
                                 .andExpect(jsonPath("$.data.authorName").value(post.getAuthor().getName()))
                                 .andExpect(jsonPath("$.data.title").value(post.getTitle()))

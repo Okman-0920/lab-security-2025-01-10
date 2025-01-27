@@ -25,6 +25,7 @@ public class CustomAuthenticationFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 		// /api/로 시작하는 요청이 아니라면 패스
+		// 일반적인 /home, /about 등 굳이 인증을 하지 않아도 돌아가도 되는 사이트는 그냥 지나치라는 것임
 		if (!request.getRequestURI().contains("/api/")) {
 			filterChain.doFilter(request, response);
 			return;
